@@ -11,10 +11,10 @@
             wrapperDetailsProduct.innerHTML = `
             <div class="card mb-3" style="min-width: 540px;">
             <div class="row g-0">
-              <div class="col-md-7">
-                <img src="${product.imageUrl}" class="img-fluid rounded-start" style="height: 400px; object-fit: cover; alt="${product.name}">
+              <div class="col-12 col-md-7">
+                <img src="${product.imageUrl}" class="img-fluid rounded-start" style="height: 400px width:100%; object-fit: cover; alt="${product.name}">
               </div>
-              <div class="col-md-5">
+              <div class="col-12 col-md-5">
                 <div class="card-body h-100">
                   <h2 class="card-title">${product.name}</h2>
                   <br/>

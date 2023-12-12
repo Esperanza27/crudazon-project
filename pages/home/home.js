@@ -102,12 +102,10 @@ function viewCreateCard() {
                     <textarea name="description" type="text" placeholder="description" required></textarea>
 
                 </div>
-
                 <div>
                     <button type="submit" class="btn btn-success">Create</button>
                     <button type="button" class="btn btn-success" onclick="onClose(event)">Close</button>
                 </div>
-
             </form>
 
         </div>  
