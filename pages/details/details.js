@@ -25,7 +25,7 @@
                   <p class="card-text display-4 d-flex justify-content-center">${product.price}€</p>
                   <br/>
                   <div class="d-flex justify-content-end align-content-end mb-0">
-              <button type="button" class="btn btn-secondary w-25"><a class="text-decoration-none text-white" href="./../home/home.html">Close</a>
+              <button type="button" class="btn btn-secondary style="width:70px""><a class="text-decoration-none text-white" href="./../home/home.html">Close</a>
               </button></div> 
                 </div>
               </div>
