@@ -2,12 +2,13 @@ const token ="Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTc1Y2ExZD
 const url = "https://striveschool-api.herokuapp.com/api/product/";
 const headers = {
   "Authorization": token,
+  "Content-Type": "application/json",
 };
 
 /* add GET ALL */
 const loadProducts = () => {
   fetch(url, {
-    headers :headers,
+    headers,
     method: "GET",
   })
     .then((resp) => resp.json())
@@ -16,32 +17,22 @@ const loadProducts = () => {
 };
 
 /* add GET BY ID (params: id)*/
-const loadProductById = (id) => {
+const loadProductById = (id, mode) => {
   fetch("https://striveschool-api.herokuapp.com/api/product/"+ id, {
-    headers :headers,
+    headers,
     method: "GET",
   })
     .then((resp) => resp.json())
-    .then((resp) => editProducts(resp))
-    .then((resp) => detailsProduct(resp))
-    .catch((err) => console.error(err));
-};
- const loadProductById2 = (id) => {
-  fetch("https://striveschool-api.herokuapp.com/api/product/"+ id, {
-    headers :headers,
-    method: "GET",
-  })
-    .then((resp) => resp.json())
-    .then((resp) => detailsProduct(resp))
+    .then((resp) => mode === 'Edit' ? editProducts(resp) : detailsProduct(resp))
     .catch((err) => console.error(err));
 };
 
 /* add PUT (params: id, data) */
 const updateProduct = (id, payload) => {
   fetch(`https://striveschool-api.herokuapp.com/api/product/${id}`, {
-    headers :headers,
+    headers,
     method: "PUT",
-    body: payload,
+    body: JSON.stringify(payload),
   })
     .then((resp) => resp.json())
     .catch((err) => console.error(err));
@@ -50,19 +41,18 @@ const updateProduct = (id, payload) => {
 /* add POST (params: data) */
 const createProduct = (payload) => {
   fetch(`https://striveschool-api.herokuapp.com/api/product`, {
-    headers :headers,
+    headers,
     method: "POST",
-    body: payload,
+    body: JSON.stringify(payload),
   })
     .then((resp) => resp.json())
-    .then((resp) => viewCreateCard(resp))
     .catch((err) => console.error(err));
 };
 
 /* add DELETE (params: id)*/
 const deleteProduct = (id) => {
   fetch(`https://striveschool-api.herokuapp.com/api/product/${id}`, {
-    headers :headers,
+    headers,
     method: "DELETE",
   })
     .then((resp) => resp.json())

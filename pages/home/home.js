@@ -2,41 +2,23 @@ window.onload = () => {
   loadProducts();
 };
 
+
 const productsWrapper = document.getElementById("products-wrapper");
 const modalWrapper = document.getElementById("modal-wrapper");
 
-const onSubmit = (e, id, mode) => {
-  e.preventDefault();
-
-  if (mode === "update") {
-    updateProduct(id, {
-      name: e.target.elements.name.value,
-      description: e.target.elements.description.value,
-      brand: e.target.elements.brand.value,
-      imageUrl: e.target.elements.image.value,
-      price: e.target.elements.price.value,
-    });
-  } else {
-    createProduct({
-      name: e.target.elements.name.value,
-      description: e.target.elements.description.value,
-      brand: e.target.elements.brand.value,
-      imageUrl: e.target.elements.image.value,
-      price: e.target.elements.price.value,
-    });
-  }
-};
-
-
 const onEdit = (id) => {
-  window.location.assign("../modifies/modifies.html?id=" + id); 
-  // add edit toggle
+  window.location.assign(`../modifies/modifies.html?id=${id}&mode=Edit`);
 };
+console.log();
+function onCreate() {
+  window.location.assign(`../modifies/modifies.html?mode=Create`);
+}
 
 const onDelete = (id) => {
-  // call delete service
   deleteProduct(id);
+  location.reload();
 };
+
 const onDetails = (id) => {
   window.location.assign("../details/details.html?id=" + id);
 };
@@ -46,7 +28,7 @@ function displayProducts(products) {
 
   console.log(products);
 
-  products.forEach((product) => {
+products.forEach((product) => {
     productsWrapper.innerHTML += `
     <div class="col ">
         <div class="card shadow-sm h-100 justify-content-center p-4 " style="width: 18rem;">
@@ -70,7 +52,7 @@ function displayProducts(products) {
                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
               </svg></button>
                 <button class="btn btn-info" onclick="onDetails('${product._id}')" > 
-                <a href='../details/details.html?id=${product._id}' class="text-decoration-none text-black">Find out more!</a>
+                <a href='../details/details.html?id=${product._id}' class="text-decoration-none text-black">View more!</a>
                 </button>
             </div>
         </div>    
@@ -78,87 +60,3 @@ function displayProducts(products) {
   `;
   });
 }
-
-const onClose = () => {
-  modalWrapper.classList.toggle("hidden");
-};
-function viewCreateCard() {
-  modalWrapper.classList.toggle("hidden");
-  modalWrapper.innerHTML = `
-    <div class="col">
-        <div class="card shadow-sm h-100">
-            <form onsubmit="onSubmit(event, 'create')">
-
-                <input name="image" type="text" value="" placeholder="img(url)" required></input>
-
-                <div class="card-body">
-
-                    <input name="name" type="text" value="" placeholder="name" required></input>
-
-                    <input name="brand" type="text" value="" placeholder="brand" required></input>
-                    
-                    <input name="price" type="number" value="" placeholder="price" required></input>
-   
-                    <textarea name="description" type="text" placeholder="description" required></textarea>
-
-                </div>
-                <div>
-                    <button type="submit" class="btn btn-success">Create</button>
-                    <button type="button" class="btn btn-success" onclick="onClose(event)">Close</button>
-                </div>
-            </form>
-
-        </div>  
-        
-    </div>
-
-  `;
-}
-
-/*   <form onsubmit="onSubmit(event, ${product.id}, 'update')">
-
-                <img src="${product.imageUrl}" class="img-fluid card-img-top ${isEditable ? "hidden" : ""}" alt="${product.name}">
-                <input name="image" type="text" class="${isEditable ? "" : "hidden"}" value="${product.imageUrl}" required></input>
-
-                <div class="card-body">
- 
-                    <h5 class="card-title ${isEditable ? "hidden" : ""}">${product.name}</h5>
-                    <input name="name" type="text" class="${isEditable ? "" : "hidden"}" value="${product.name}" required></input>
-
-
-                    <p class="card-text rounded-pill bg-dark mb-2 ${isEditable ? "hidden" : "badge"}">${product.brand}</p>
-                    <input name="brand" type="text" class="${isEditable ? "" : "hidden"}" value="${product.brand}" required></input>
-                    
-
-                    <p class="fs-4 ${isEditable ? "hidden" : ""}">${product.price}€</p>
-                    <input name="price" type="number" class="${isEditable ? "" : "hidden"}" value="${product.price}" required></input>
-
-                    <p class="card-text rounded-pill bg-dark mb-2 ${isEditable ? "hidden" : "badge"}">${product.description}</p>
-                    <textarea name="description" type="text" class="${isEditable ? "" : "hidden"}" required>${product.description}</textarea>
-
-                </div>
-
-                <div class="${isEditable ? "" : "hidden"}">
-                    <button type="submit" class="btn btn-success">Update</button>
-
-                </div>
-
-            </form> */
-            /* const mocks = [
-  {
-    id: 1,
-    name: "Samsung Galaxy S22",
-    description: "Samsung Galaxy S22 - phantom black",
-    brand: "Samsung",
-    imageUrl: "https://cdn.pixabay.com/photo/2018/01/23/01/24/cellphone-3100428_1280.png",
-    price: 577,
-  },
-  {
-    id: 2,
-    name: "Motorola Moto G23",
-    description: "Motorola Moto G23 - Azul Cristal",
-    brand: "Motorola",
-    imageUrl: "../../assets/img/mobile-phone-2198770_1280.png",
-    price: 179,
-  },
-]; */

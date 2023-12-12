@@ -2,7 +2,7 @@
         const id = params.get("id");
         console.log(id);
         window.onload = () => {
-            loadProductById2(id);
+          loadProductById(id, "details");
           };
             
         const wrapperDetailsProduct = document.getElementById("product-details-wrapper");
