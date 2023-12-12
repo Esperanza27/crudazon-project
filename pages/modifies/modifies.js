@@ -49,19 +49,28 @@ function editProducts(product) {
   wrapperEditProducts.innerHTML = `
       <div class="col">
           <div class="card shadow-sm h-100 justify-content-center">
-              <form id="my-form" onsubmit="onSubmit(event)">              
+              <form id="my-form" onsubmit="onSubmit(event)">      
                   <div class="card-body d-flex flex-column justify-content-center ">
-                      <input name="image" type="text" value="${isEdit ? product.imageUrl : ''} " required></input>
-                      <input name="name" type="text" class="" value="${isEdit ? product.name : ''}" required></input>
-                      <input name="brand" type="text" class="" value="${isEdit ? product.brand : ''}" required></input>
-                      <textarea name="description" type="text" placeholder="description" required>${isEdit ? product.description : ''}</textarea>
-                      <input name="price" type="number" class="" value="${isEdit ? product.price : ''}" required></input>
-                  </div>
+                      <label for="image" class="form-label fw-bold">Image</label>
+                      <input name="image" type="text" placeholder="write the URL of your product photo" value="${isEdit ? product.imageUrl : ''} " required></input>
+                      <br/>
+                      <label for="name" class="form-label fw-bold">Name</label>
+                      <input name="name" type="text" placeholder="write the name of your product" value="${isEdit ? product.name : ''}" required></input>
+                      <br/>
+                      <label for="brand" class="form-label fw-bold">Brand</label>
+                      <input name="brand" type="text" placeholder="write the brand of your product" value="${isEdit ? product.brand : ''}" required></input>
+                      <br/>
+                      <label for="description" class="form-label fw-bold">Description</label>
+                      <textarea name="description" type="text" placeholder="write the description of your product" required>${isEdit ? product.description : ''}</textarea>
+                      <br/>
+                      <label for="price" class="form-label fw-bold">Price</label>
+                      <input name="price" type="number" placeholder="write the price of your product in number" value="${isEdit ? product.price : ''}" required></input>
+                      </div>
   
-                  <div class="d-flex justify-content-evenly">
-                      <button type="submit" class="btn btn-success">${mode}</button>
-                      <button type="button" class="btn btn-success" onclick="onReset()">Reset</button>
-                      <button type="button" class="btn btn-success"><a class="text-decoration-none text-white" href="../home/home.html">Close</a>
+                  <div class="d-flex justify-content-evenly mb-3 mt-1 ">
+                      <button type="submit" class="btn btn-secondary " style="width:70px" >${mode}</button>
+                      <button type="button" class="btn btn-secondary " onclick="onReset()" style="width:70px">Reset</button>
+                      <button type="button" class="btn btn-secondary" style="width:70px"><a class="text-decoration-none text-white" href="../home/home.html">Close</a>
                       </button>
                   </div>
   
